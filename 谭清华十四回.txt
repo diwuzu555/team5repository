@@ -1,0 +1,1 @@
+animation:changDeg 20s linear 2s infinite;
