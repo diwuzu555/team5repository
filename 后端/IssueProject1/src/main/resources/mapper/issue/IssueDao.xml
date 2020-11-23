@@ -36,7 +36,7 @@
                   #{grade},
                   #{version},
                   #{step},
-                  #{plan},
+                  #{plan}
            );
     </insert>
  
