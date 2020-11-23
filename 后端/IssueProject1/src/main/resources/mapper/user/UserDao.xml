@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glc.demo.user.dao.UserDao">
+<!--    <insert id="save" parameterType="com.glc.demo.user.entity.UserEntity">
+        INSERT INTO `issue`.`user` (
+                `userId`,
+                `name`,
+                `email`,
+                `uCreateTime`,
+                `identity`,
+                `status`,
+                `password`
+            )
+            VALUES
+                (
+                    #{userId},                
+                    #{name},
+                    #{email},
+                    #{uCreateTime},
+                    #{identity},
+                    #{status},
+                    #{password}
+                );
+    </insert>
+
+    <update id="updateUserByUserId" parameterType="com.glc.demo.user.entity.UserEntity">
+            update user set `name`=#{name},`email`=#{email},`password`=#{password} where userId=${userId};
+    </update>
+    <update id="updateUserByUserId" parameterType="com.glc.demo.user.entity.UserEntity">
+            update user set `status`=#{status} where userId=${userId};
+    </update>
+    <delete id="delByUserId" parameterType="java.lang.Integer">
+        delete from user where userId=${userId}
+    </delete>
+
+    <select id="getAll" resultType="com.glc.demo.user.entity.UserEntity" parameterType="java.util.Map">
+        select  * from user
+    </select>
+
+    <select id="getUserByUserId" parameterType="java.lang.Integer" resultType="com.glc.demo.user.entity.UserEntity">
+        select * from user where userId =${userId}
+    </select>  -->
+    
+    <!-- 注册 -->
+    <insert id="register" parameterType="com.glc.demo.user.entity.UserEntity">
+         INSERT INTO `issue`.`user` (
+                `userId`,
+                `name`,
+                `email`,
+                `uCreateTime`,
+                `identity`,
+                `status`,
+                `password`
+            )
+            VALUES(
+                  #{userId},                
+                  #{name},
+                  #{email},
+                  #{uCreateTime},
+                  #{identity},
+                  #{status},
+                  #{password}
+           );
+    </insert>
+    
+    <!-- 登录 -->
+    <select id="login"  parameterType="java.lang.Integer">
+       SELETE name 
+          FROM user
+          WHERE userId=#{userId} and password=#{password};
+    </select> 
+ 
+    <!-- 修改user -->
+    <update id="updateUser" parameterType="com.glc.demo.user.entity.UserEntity">
+       UPDATE user 
+       <trim prefix="set" suffixOverrides=",">
+        <if test="name!=null and name!=''">name=#{name},</if>
+        <if test="email!=null and email!=''">email=#{email},</if>
+        <if test="name!=null and name!=''">name=#{name},</if>
+        <if test="uCreateTime!=null and uCreateTime!=''">uCreateTime=#{uCreateTime},</if>
+        <if test="identity!=null and identity!=''">identity=#{identity},</if>
+        <if test="status!=null and status!=''">status=#{status},</if>
+        <if test="password!=null and password!=''">password=#{password},</if>
+        </trim>
+        WHERE userId=${userId}
+       <!--   SET `name`=#{name},`email`=#{email},`password`=#{password} 
+          WHERE userId=${userId}; -->
+    </update>
+ 
+    <!-- 删除user -->
+    <delete id="deleteUser"  parameterType="java.lang.Integer">
+       DELETE FROM user 
+          WHERE userId=${userId};
+    </delete>
+ 
+    <!-- 根据id获取用户信息 -->
+    <select id="queryUser" resultType="com.glc.demo.user.entity.UserEntity" parameterType="java.lang.Integer">
+        SELECT *
+          FROM user
+          WHERE userId=#{userId};
+    </select>
+ 
+    <!-- 查询所有用户信息 -->
+    <select id="listUser" resultType="com.glc.demo.user.entity.UserEntity" parameterType="java.util.Map">
+        SELECT *
+          FROM user;
+    </select> 
+    
+</mapper>

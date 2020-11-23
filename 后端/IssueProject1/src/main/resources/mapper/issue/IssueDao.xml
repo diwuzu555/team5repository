@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glc.demo.user.dao.IssueDao">
+    <!-- 创建issue -->
+    <insert id="insertIssue" parameterType="com.glc.demo.user.entity.IssueEntity">
+         INSERT INTO `issue`.`issue` (
+                `issueId`,
+                `title`,
+                `founder`,
+                `iCreateTime`,
+                `reviser`,
+                `issueStatus`,
+                `planTime`,
+                `actualTime`,
+                `userId1`,
+                `userId2`,
+                `type`,
+                `grade`,
+                `version`,
+                `step`,
+                `plan`
+            )
+            VALUES(
+                  #{issueId},                
+                  #{title},
+                  #{founder},
+                  #{iCreateTime},
+                  #{reviser},
+                  #{issueStatus},
+                  #{planTime},
+                  #{actualTime},
+                  #{userId1},
+                  #{userId2},
+                  #{type},
+                  #{grade},
+                  #{version},
+                  #{step},
+                  #{plan},
+           );
+    </insert>
+ 
+    <!-- 修改issue -->
+    <update id="updateIssue" parameterType="com.glc.demo.user.entity.IssueEntity">
+    
+       UPDATE issue
+       <trim prefix="set" suffixOverrides=",">
+       <if test="title!=null and title!=''">title=#{title},</if>
+       <if test="founder!=null and founder!=''">founder=#{founder},</if>
+       <if test="iCreateTime!=null and iCreateTime!=''">iCreateTime=#{iCreateTime},</if>
+       <if test="reviser!=null and reviser!=''">reviser=#{reviser},</if>
+       <if test="issueStatus!=null and issueStatus!=''">issueStatus=#{issueStatus},</if>
+       <if test="planTime!=null and planTime!=''">planTime=#{planTime},</if>
+       <if test="actualTime!=null and actualTime!=''">actualTime=#{actualTime},</if>
+       <if test="type!=null and type!=''">type=#{type},</if>
+       <if test="grade!=null and grade!=''">grade=#{grade},</if>
+       <if test="version!=null and version!=''">version=#{version},</if>
+       <if test="step!=null and step!=''">step=#{step},</if>
+       <if test="plan!=null and plan!=''">plan=#{plan},</if>
+       </trim>
+       WHERE issueId=#{issueId}
+       <!--     SET `title`=#{title} `founder`=#{founder} `iCreateTime`=#{iCreateTime}  `reviser`=#{reviser},`plan`=#{plan} `type`=#{type}
+          WHERE issueId=${issueId};-->
+    </update>
+ 
+    <!-- 删除issue -->
+    <delete id="deleteIssue"  parameterType="java.lang.Integer">
+       DELETE FROM issue 
+          WHERE issueId=${issueId};
+    </delete>
+ 
+    <!-- 查询issue列表（大于，&gt；小于，&lt;） -->
+    <select id="queryIssue" resultType="com.glc.demo.user.entity.IssueEntity" parameterType="java.lang.Integer">
+        SELECT issueId, title, founder, iCreateTime, reviser, issueStatus, planTime, actualTime
+          FROM issue
+          WHERE issueId=#{issueId};
+    </select>
+ 
+    <!-- 查询所有issue列表 -->
+    <select id="listIssue" resultType="com.glc.demo.user.entity.IssueEntity" parameterType="java.util.Map">
+        SELECT issueId, title, founder, iCreateTime, reviser, issueStatus, planTime, actualTime
+          FROM issue;
+    </select>
+      
+</mapper>
