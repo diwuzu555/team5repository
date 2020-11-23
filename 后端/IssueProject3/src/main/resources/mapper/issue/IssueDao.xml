@@ -81,22 +81,5 @@
         SELECT issueId, title, founder, iCreateTime, reviser, issueStatus, planTime, actualTime
           FROM issue;
     </select>
-    <!-- 报表查询 -->
-    <select id="queryReport" resultType="com.glc.demo.user.entity.IssueEntity" parameterType="java.util.Map">
-    select distinct t.userId1,t1.crtCnt,t2.slvCnt,t3.tttCnt,ROUND(t3.tttCnt/t2.slvCnt*100,0)as percent from issue t
-
-    left join
-
-    (select founder, count(issueId) crtCnt from issue group by  founder) t1
-    on t.founder = t1.founder
-
-    left join
-    (select reviser, count(issueId) slvCnt from issue  group by  reviser) t2
-
-    on  t.founder = t2.reviser
-
-    left join
-    (select reviser, count(issueId) tttCnt from issue  where issueStatus='已关闭' group by  reviser) t3
-    on  t.founder = t3.reviser
-       </select>
+      
 </mapper>

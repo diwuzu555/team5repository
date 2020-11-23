@@ -26,13 +26,6 @@ public class IssueController {
 		return issueService.listIssue(map);
 	}
 
-	// 报表生成
-	@ResponseBody
-	@RequestMapping("/queryReport")
-	public IssueEntity queryReport() {
-		return issueService.queryReport();
-	}
-
 	// 删除issue
 	@RequestMapping("/deleteIssue")
 	public String deleteIssue(Integer issueId) {

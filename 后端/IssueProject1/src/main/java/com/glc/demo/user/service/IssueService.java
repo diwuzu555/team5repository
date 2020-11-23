@@ -11,15 +11,18 @@ public interface IssueService {
 
 	List<IssueEntity> listIssue(Map map);
 
-    //创建issue
-    public void insertIssue(IssueEntity issue);
+	// 报表生成
+	public IssueEntity queryReport();
 
-    //查询issue
-    public IssueEntity queryIssue(Integer issueId);
+	// 创建issue
+	public void insertIssue(IssueEntity issue);
 
-    //修改issue
-    public void updateIssue(@RequestBody IssueEntity issue);
-    
-    //删除issue
-    public void deleteIssue(Integer issueId);
+	// 查询issue
+	public IssueEntity queryIssue(Integer issueId);
+
+	// 修改issue
+	public void updateIssue(@RequestBody IssueEntity issue);
+
+	// 删除issue
+	public void deleteIssue(Integer issueId);
 }
